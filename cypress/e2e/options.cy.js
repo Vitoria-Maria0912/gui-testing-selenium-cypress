@@ -42,6 +42,15 @@ describe('options', () => {
     cy.get('body').should('contain', 'This form contains errors.')
   });
 
-  // it('test case 3', () => {
-  // });
+  it('delete a product', () => {
+  });
+
+  it('filter by product option name', () => {
+      cy.get('#criteria_search_type').select('Contains');
+      cy.get('#criteria_search_value').click().type('size');
+      cy.get('*[class^="ui blue labeled icon button"]').last().click();
+      cy.clickInFirst('*[class^="sortable sylius-table-column-name"]');
+      cy.url().should('include', 'asc');
+      cy.get('body').should('contain', 'T-shirt size');
+  });
 });
