@@ -21,19 +21,35 @@ reset-database-podman:
 install-yarn:
 	npm install -g yarn
 
-use-cypress:
+use-cypress-yarn:
 	yarn install
 	yarn cypress
 
-test-cypress-all:
+test-cypress-yarn-all:
 	yarn cypress:test-suite
 
-test-cypress-options:
+test-cypress-yarn-options:
 	yarn cypress:test-file cypress/e2e/options.cy.js
 
-test-selenium-all:
+test-selenium-yarn-all:
 	yarn selenium:test-suite
 
-test-selenium-options:
+test-selenium-yarn-options:
 	yarn selenium:test-file selenium/e2e/options.js
+
+use-cypress-npm:
+	npm install
+	npm run cypress
+
+test-cypress-npm-all:
+	npm run cypress:test-suite
+
+test-cypress-npm-options:
+	npm run cypress:test-file cypress/e2e/options.cy.js
+
+test-selenium-npm-all:
+	npm selenium:test-suite
+
+test-selenium-npm-options:
+	npm selenium:test-file selenium/e2e/options.js
 
