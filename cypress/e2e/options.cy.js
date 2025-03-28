@@ -42,8 +42,6 @@ describe('options', () => {
     cy.get('body').should('contain', 'This form contains errors.')
   });
 
-  it('delete a product', () => {});
-
   it('filter by product name, with contains', () => {
       cy.get('#criteria_search_type').select('Contains');
       cy.get('#criteria_search_value').click().type('size');
@@ -52,8 +50,6 @@ describe('options', () => {
       cy.url().should('include', 'asc');
       cy.get('body').should('contain', 'T-shirt size');
   });
-
-  it('filter by product name, with equals', () => {});
 
   it('try to delete a product, but givin up', () => {
 
@@ -75,8 +71,6 @@ describe('options', () => {
     });
   });
 
-  it('edit a product size `S` to `P` in Spanish (Spain)', () => {});
-
   it('edit a product name `t_shirt_size` to `blusengröße` in German (Germany)', () => {
     cy.get('*[class^="ui labeled icon button"]').eq(2).click();
     cy.get('*[class^="ui styled fluid accordion"]');
@@ -88,7 +82,15 @@ describe('options', () => {
 
   it('', () => {});
 
-  it('', () => {});
+  // Lucas - Cypress
+
+  it('delete a product', () => {});
+
+  it('delete some product options', () => {});
+
+  it('edit a product size `S` to `P` in Spanish (Spain)', () => {});
+
+  it('filter by product name, with equals', () => {});
 
   it('', () => {});
 });
