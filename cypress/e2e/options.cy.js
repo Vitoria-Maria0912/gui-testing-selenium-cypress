@@ -18,6 +18,8 @@ describe('options', () => {
     cy.get('[id="sylius_save_changes_button"]', { timeout: 10000 }).scrollIntoView().click();
     cy.get('body', { timeout: 10000 }).should('contain', 'Product option has been successfully updated.');
   });
+  
+  it('create a new product and cancel the creation', () => {});
 
   it('create a new product, forgetting to add a product name in English', () => {
     cy.get('*[class^="ui right floated buttons"]', { timeout: 20000 }).click();
@@ -77,7 +79,6 @@ describe('options', () => {
     cy.get('body', { timeout: 10000 }).should('contain', 'Product option has been successfully created.');
   });
   
-
   it('edit a product name `t_shirt_size` to `blusengröße` in German (Germany)', () => {
     cy.get('*[class^="ui labeled icon button"]', { timeout: 10000 }).eq(2).click();
     cy.get('*[class^="ui styled fluid accordion"]', { timeout: 10000 });
