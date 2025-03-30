@@ -155,7 +155,7 @@ describe('options', () => {
   });
 
   it('filter by product name, with equals', () => {
-    cy.get('#criteria_search_type', { timeout: 10000 }).select('Equals');
+    cy.get('#criteria_search_type', { timeout: 10000 }).select('Equal');
     cy.get('#criteria_search_value', { timeout: 10000 }).click().type('T-shirt size');
     cy.get('*[class^="ui blue labeled icon button"]', { timeout: 10000 }).last().click();
     cy.clickInFirst('*[class^="sortable sylius-table-column-name"]', { timeout: 10000 });
