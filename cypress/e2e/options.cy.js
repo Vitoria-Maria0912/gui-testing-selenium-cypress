@@ -19,7 +19,19 @@ describe('options', () => {
     cy.get('body', { timeout: 10000 }).should('contain', 'Product option has been successfully updated.');
   });
   
-  it('create a new product and cancel the creation', () => {});
+  it('trying to create a product, but giving up', () => {
+    cy.get('*[class^="ui right floated buttons"]').click();
+    cy.get('#sylius_product_option_code').type("zapatos_tipo");
+    cy.get('#sylius_product_option_position').type(7);
+    cy.get('*[class^="ui styled fluid accordion"]');
+    cy.contains('.title', 'Spanish (Mexico)').click();
+    cy.get('#sylius_product_option_translations_es_MX_name').type("zapatos_tipo");
+    cy.contains('*[class^="ui labeled icon button"]', 'Add value').click();
+    cy.get('#sylius_product_option_values_0_code').type("zapatos_tipo");
+    cy.get('#sylius_product_option_values_0_translations_en_US_value').type("shoes_type");
+    cy.get('*[class^="ui button"]').last().click();
+    cy.url({timeout: 10000}).should('eq', 'http://localhost:8080/admin/product-options/');
+  });
 
   it('create a new product, forgetting to add a product name in English', () => {
     cy.get('*[class^="ui right floated buttons"]', { timeout: 20000 }).click();
@@ -44,7 +56,7 @@ describe('options', () => {
     cy.get('body', { timeout: 10000 }).should('contain', 'T-shirt size');
   });
 
-  it('try to delete a product, but giving up', () => {
+  it('trying to delete a product, but giving up', () => {
     cy.get('.ui.red.labeled.icon.button', { timeout: 10000 }).then(buttons => {
       const buttonsLength = buttons.length;
       if (buttonsLength > 0) {
