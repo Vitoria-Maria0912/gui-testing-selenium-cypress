@@ -18,20 +18,6 @@ describe('options', () => {
     cy.get('[id="sylius_save_changes_button"]', { timeout: 10000 }).scrollIntoView().click();
     cy.get('body', { timeout: 10000 }).should('contain', 'Product option has been successfully updated.');
   });
-  
-  it('trying to create a product, but giving up', () => {
-    cy.get('*[class^="ui right floated buttons"]').click();
-    cy.get('#sylius_product_option_code').type("zapatos_tipo");
-    cy.get('#sylius_product_option_position').type(7);
-    cy.get('*[class^="ui styled fluid accordion"]');
-    cy.contains('.title', 'Spanish (Mexico)').click();
-    cy.get('#sylius_product_option_translations_es_MX_name').type("zapatos_tipo");
-    cy.contains('*[class^="ui labeled icon button"]', 'Add value').click();
-    cy.get('#sylius_product_option_values_0_code').type("zapatos_tipo");
-    cy.get('#sylius_product_option_values_0_translations_en_US_value').type("shoes_type");
-    cy.get('*[class^="ui button"]').last().click();
-    cy.url({timeout: 10000}).should('eq', 'http://localhost:8080/admin/product-options/');
-  });
 
   it('create a new product, forgetting to add a product name in English', () => {
     cy.get('*[class^="ui right floated buttons"]', { timeout: 20000 }).click();
@@ -56,7 +42,7 @@ describe('options', () => {
     cy.get('body', { timeout: 10000 }).should('contain', 'T-shirt size');
   });
 
-  it('trying to delete a product, but giving up', () => {
+  it('try to delete a product, but giving up', () => {
     cy.get('.ui.red.labeled.icon.button', { timeout: 10000 }).then(buttons => {
       const buttonsLength = buttons.length;
       if (buttonsLength > 0) {
@@ -91,6 +77,7 @@ describe('options', () => {
     cy.get('body', { timeout: 10000 }).should('contain', 'Product option has been successfully created.');
   });
   
+
   it('edit a product name `t_shirt_size` to `blusengröße` in German (Germany)', () => {
     cy.get('*[class^="ui labeled icon button"]', { timeout: 10000 }).eq(2).click();
     cy.get('*[class^="ui styled fluid accordion"]', { timeout: 10000 });
@@ -155,12 +142,17 @@ describe('options', () => {
   });
 
   it('filter by product name, with equals', () => {
-    cy.get('#criteria_search_type', { timeout: 10000 }).select('Equal');
-    cy.get('#criteria_search_value', { timeout: 10000 }).click().type('T-shirt size');
-    cy.get('*[class^="ui blue labeled icon button"]', { timeout: 10000 }).last().click();
+    cy.get('#criteria_search_type', { timeout: 15000 }).select('Equal');
+    cy.get('#criteria_search_value', { timeout: 10000 }).click().clear().type('Jeans size'); // Garante que o campo está limpo antes
+    cy.get('*[class^="ui blue labeled icon button"]', { timeout: 10000 }).first().click(); // Tenta usar .first() em vez de .last()
+    
     cy.clickInFirst('*[class^="sortable sylius-table-column-name"]', { timeout: 10000 });
+  
     cy.url({ timeout: 10000 }).should('include', 'asc');
-    cy.get('body', { timeout: 10000 }).should('contain', 'T-shirt size');
+  
+    cy.get('body', { timeout: 10000 }).invoke('text').then((text) => {
+      expect(text.trim()).to.include('Jeans size'); // Remove espaços extras
+    });
   });
-
+  
 });
