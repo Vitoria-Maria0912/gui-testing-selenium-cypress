@@ -23,6 +23,10 @@ RUN apt-get update && apt-get install -y \
 
 RUN groupadd -r mysql && useradd -r -g mysql mysql
 
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - \
+  && apt-get install -y nodejs \
+  && apt-get clean
+
 # Append NODE, NGINX and PHP repositories
 # and install required PHP extensions
 RUN add-apt-repository ppa:ondrej/php \
