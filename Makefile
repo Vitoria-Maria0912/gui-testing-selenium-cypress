@@ -48,8 +48,7 @@ test-cypress-npm-options:
 	npm run cypress:test-file cypress/e2e/options.cy.js
 
 test-selenium-npm-all:
-	npm selenium:test-suite
+	npm run selenium:test-suite
 
 test-selenium-npm-options:
-	npm selenium:test-file selenium/e2e/options.js
-
+	npm run selenium:test-file selenium/e2e/options.js
